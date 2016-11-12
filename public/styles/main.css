@@ -12,7 +12,7 @@ li {
 
 form {
   width: 700px;
-  margin: 0 auto;	
+  margin: 0 auto;
 }
 
 textarea {
@@ -22,4 +22,45 @@ textarea {
   height: 100px;
   font: 30px helvetica;
   font-weight: 100;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Roboto, sans-serif;
+}
+
+.backdrop {
+	position: fixed;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 1299;
+}
+
+.action-area {
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+}
+
+.content-wrapper {
+	display: block;
+	box-sizing: border-box;
+	max-width: 760px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 1.5em 1em;
+}
+
+.title {
+	margin: 0;
+}
+
+.task-collection {
+	display: 'flex';
+  flex-wrap: 'wrap';
+  justify-content: 'space-around';
 }
