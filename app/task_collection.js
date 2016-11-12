@@ -2,11 +2,12 @@ import React from 'react';
 import { GridList, GridTile } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
-import Person from 'material-ui/svg-icons/social/Person';
+import ActionInfo from 'material-ui/svg-icons/action/info';
+
 
 let tasks = [];
 
-const iconButton = <IconButton><Person color="white"/></IconButton>
+const iconButton = <IconButton><ActionInfo color="white"/></IconButton>
 
 const TaskCollection = () => (
   <div className="task-collection">

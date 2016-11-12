@@ -4,7 +4,6 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
 const AppMenu = (props) => {
-    console.log(props);
     return (
       <Drawer open={props.open}>
         <MenuItem>My messages</MenuItem>

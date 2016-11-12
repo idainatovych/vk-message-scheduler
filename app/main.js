@@ -8,10 +8,9 @@ import AppMenu from './app_menu';
 import Backdrop from './backdrop';
 import ScheduleMessageButton from './schedule_message_button';
 import TaskCollection from './task_collection';
+import CreateTaskDialog from './create_task_dialog';
 
 injectTapEventPlugin();
-
-console.log(AppMenu);
 
 let className = 'muidocs-icon-navigation-expand-more';
 
@@ -21,25 +20,43 @@ class App extends React.Component {
     this.state = { openMenu: false };
   }
 
+  _createTask() {
+    this.setState({ createTask: true });
+  }
+
+  _onCloseCreateTask() {
+    this.setState({ createTask: false });
+  }
+
+  _closeMenu() {
+    this.setState({ openMenu: false });
+  }
+
+  _openMenu() {
+    this.setState({ openMenu: true });
+  }
+
   render() {
+    let createTaskDialog = null;
+    if (this.state.createTask) {
+      createTaskDialog  = <CreateTaskDialog onClose={this._onCloseCreateTask.bind(this)}/>;
+    }
     return (
       <MuiThemeProvider>
         <div>
+          {createTaskDialog}
           <AppBar title="VK Scheduler"
                   iconClassNameRight={className}
-                  onLeftIconButtonTouchTap={() => {
-                    this.setState({ openMenu: true });
-                  }}/>
+                  onLeftIconButtonTouchTap={this._openMenu.bind(this)}/>
           <div className="content-wrapper">
             <h2 className="title">My Schedule</h2>
             <TaskCollection/>
             <AppMenu open={this.state.openMenu}/>
-            <Backdrop open={this.state.openMenu} onClick={() => {
-              this.setState({ openMenu: false });
-            }}/>
+            <Backdrop open={this.state.openMenu}
+                    onClick={this._closeMenu.bind(this)}/>
           </div>
           <div className="action-area">
-            <ScheduleMessageButton/>
+            <ScheduleMessageButton onTouchTap={this._createTask.bind(this)}/>
           </div>
         </div>
       </MuiThemeProvider>
