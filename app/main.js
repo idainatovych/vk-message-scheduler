@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import App from './components/app/app';
+import { App } from './components/app';
+
 
 injectTapEventPlugin();
 
@@ -12,12 +14,12 @@ const reducer = (state = {}, action) => {
       return state;
   }
 };
-
 const store = createStore(reducer);
-const render = () => {
-  const anchor = document.getElementById('app');
-  ReactDOM.render(<App/>, anchor);
-};
+const Root = () => (
+  <Provider store={store}>
+    <App/>
+  </Provider>
+);
+const element = document.getElementById('app');
 
-store.subscribe(render);
-render();
+ReactDOM.render(<Root/>, element);
