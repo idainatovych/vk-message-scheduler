@@ -11,7 +11,6 @@ export default class CreateTaskDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
       onClose: props.onClose || function () {}
      };
   }
@@ -32,7 +31,7 @@ export default class CreateTaskDialog extends React.Component {
       <Dialog modal={true}
               title="Create Task"
               actions={actions}
-              open={this.state.open}
+              open={this.props.open}
               contentStyle={styles}>
         <TaskForm/>
       </Dialog>
