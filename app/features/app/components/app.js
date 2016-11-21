@@ -17,8 +17,7 @@ import {
 import {
   openMenu,
   closeMenu,
-  openCreateTaskDialog,
-  closeCreateTaskDialog
+  openCreateTaskDialog
 } from '../actions';
 
 const className = 'muidocs-icon-navigation-expand-more';
@@ -26,9 +25,7 @@ const className = 'muidocs-icon-navigation-expand-more';
 const App = (props) => (
   <MuiThemeProvider>
     <div>
-      <CreateTaskDialog
-        open={props.isCreateTaskDialogOpen}
-        onClose={props.closeCreateTaskDialog}/>
+      <CreateTaskDialog/>
       <AppBar title="VK Scheduler"
               iconClassNameRight={className}
               onLeftIconButtonTouchTap={props.openMenu}/>
@@ -48,14 +45,12 @@ const App = (props) => (
 
 const mapStateToProps = (state) => ({
   isMenuOpen: state.app.isMenuOpen,
-  isCreateTaskDialogOpen: state.app.isCreateTaskDialogOpen
 });
 
 const mapDispatchToProps = (dispatch) => ({
   openMenu: () => openMenu(dispatch),
   closeMenu: () => closeMenu(dispatch),
-  openCreateTaskDialog: () => openCreateTaskDialog(dispatch),
-  closeCreateTaskDialog: () => closeCreateTaskDialog(dispatch)
+  openCreateTaskDialog: () => openCreateTaskDialog(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

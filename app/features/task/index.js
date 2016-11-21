@@ -3,9 +3,12 @@ import scheduleTaskButton from './components/schedule_task_button';
 import taskCollection from './components/task_collection';
 import taskForm from './components/task_form';
 
+import reducer from './reducer';
+
 export {
   createTaskDialog as CreateTaskDialog,
   scheduleTaskButton as ScheduleTaskButton,
   taskCollection as TaskCollection,
-  taskForm as TaskForm
+  taskForm as TaskForm,
+  reducer as tasks
 };
