@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   applyMiddleware,
   createStore,
-  combineReducers,
-  compose
+  combineReducers
 } from 'redux';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -24,6 +23,8 @@ const reducer = combineReducers({
   tasks,
   connections
 });
+
+console.log('hello');
 
 const store = createStore(reducer, applyMiddleware(...middlewares));
 

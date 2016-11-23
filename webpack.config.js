@@ -6,6 +6,7 @@ config = {
   entry: './main.js',
   output: {
     path: __dirname + '/public/scripts',
+    publicPath: '/scripts/',
     filename: 'bundle.js'
   },
   module: {
@@ -14,7 +15,10 @@ config = {
       loader: 'babel-loader'
     }]
   },
-  devtool: 'inline-source-maps'
+  devServer: {
+    inline: true,
+    contentBase: './public'
+  }
 };
 
 config.plugins = config.plugins || [];
@@ -24,12 +28,14 @@ if (prod) {
       'NODE_ENV': `"production"`
     }
   }));
+  config.devtool = '#source-map';
 } else {
   config.plugins.push(new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': `"development"`
     }
   }));
+  config.devtool = '#eval-inline-source-map';
 }
 
 module.exports = config;

@@ -5,6 +5,9 @@ all: build start
 
 dev: build-dev start
 
+dev-server:
+	$(YARN) dev
+
 build:
 	echo '\nBuilding production version\n';
 	$(WEBPACK) -p;

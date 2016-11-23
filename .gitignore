@@ -1,5 +1,5 @@
 node_modules/
-public/scripts/bundle.js
+public/scripts/
 yarn.lock
 npm-debug.log
 .idea/
