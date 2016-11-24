@@ -1,6 +1,6 @@
 const middlewares = [];
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   const logger = require('redux-logger')(
     {
       duration: true,
