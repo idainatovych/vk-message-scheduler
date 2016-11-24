@@ -24,8 +24,6 @@ const reducer = combineReducers({
   connections
 });
 
-console.log('hello');
-
 const store = createStore(reducer, applyMiddleware(...middlewares));
 
 const Root = () => (
