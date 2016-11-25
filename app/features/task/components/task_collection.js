@@ -9,7 +9,7 @@ import ActionInfo from 'material-ui/svg-icons/action/info';
 const iconButton = <IconButton><ActionInfo color="white"/></IconButton>
 
 class TaskCollection extends React.Component {
-  renderSchedule() {
+  _renderSchedule() {
     if (this.props.tasks.length > 0) {
       return this.props.tasks.map((event, i) => (
         <GridTile title={event.title}
@@ -25,11 +25,10 @@ class TaskCollection extends React.Component {
   }
 
   render() {
-    const mocks = this.renderSchedule();
     return (
       <div className="task-collection">
         <GridList>
-          {mocks}
+          {this._renderSchedule()}
         </GridList>
       </div>
     );
