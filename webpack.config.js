@@ -30,11 +30,6 @@ if (prod) {
   }));
   config.devtool = '#source-map';
 } else {
-  config.plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': `"development"`
-    }
-  }));
   config.devtool = '#eval-inline-source-map';
 }
 

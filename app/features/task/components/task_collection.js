@@ -6,49 +6,29 @@ import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
-
-let tasks = [];
-
 const iconButton = <IconButton><ActionInfo color="white"/></IconButton>
 
 class TaskCollection extends React.Component {
+  _renderSchedule() {
+    if (this.props.tasks.length > 0) {
+      return this.props.tasks.map((event, i) => (
+        <GridTile title={event.title}
+                  key={i}
+                  actionIcon={iconButton}
+                  subtitle='John Doe at 12.45 pm'>
+          <img src="http://lorempixel.com/300/300/cats"/>
+        </GridTile>
+      ));
+    } else {
+      return <p>Empty, click action button to create.</p>
+    }
+  }
+
   render() {
     return (
       <div className="task-collection">
         <GridList>
-          <Subheader>Saturday</Subheader>
-          <GridTile key={1} title="Lorem"
-                    actionIcon={iconButton}
-                    subtitle="John Doe at 12.45 pm">
-            <img src="http://lorempixel.com/300/300/cats"/>
-          </GridTile>
-          <GridTile key={2} title="Ipsum"
-                    actionIcon={iconButton}
-                    subtitle="John Doe at 12.45 pm">
-            <img src="http://lorempixel.com/300/300/cats"/>
-          </GridTile>
-          <Subheader>Sunday</Subheader>
-          <GridTile key={3} title="Dolor"
-                    actionIcon={iconButton}
-                    subtitle="John Doe at 12.45 pm">
-            <img src="http://lorempixel.com/300/300/cats"/>
-          </GridTile>
-          <GridTile key={4} title="Sit amet"
-                    actionIcon={iconButton}
-                    subtitle="John Doe at 12.45 pm">
-            <img src="http://lorempixel.com/300/300/cats"/>
-          </GridTile>
-          <Subheader>Monday</Subheader>
-          <GridTile key={5} title="Dolor"
-                    actionIcon={iconButton}
-                    subtitle="John Doe at 12.45 pm">
-            <img src="http://lorempixel.com/300/300/cats"/>
-          </GridTile>
-          <GridTile key={6} title="Sit amet"
-                    actionIcon={iconButton}
-                    subtitle="John Doe at 12.45 pm">
-            <img src="http://lorempixel.com/300/300/cats"/>
-          </GridTile>
+          {this._renderSchedule()}
         </GridList>
       </div>
     );
@@ -56,11 +36,9 @@ class TaskCollection extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  tasks: state.tasks
 });
 
-const mapDispatchToProps = (dispatch) => ({
-
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskCollection);
