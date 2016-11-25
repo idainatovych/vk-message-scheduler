@@ -72,9 +72,8 @@ class TaskCollection extends React.Component {
       recipient
     } = task;
 
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let subtitle = `${ recipient } at ${ hours }:${ minutes }`;
+    let formattedDate = helpers.formatDate(date);
+    let subtitle = `${ recipient } at ${formattedDate}`;
 
     return (
       <GridTile key={ helpers.generateId() } title={ title }

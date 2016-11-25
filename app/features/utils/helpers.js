@@ -29,5 +29,23 @@ export default {
     } else {
       return 0;
     }
+  },
+
+  /**
+  * Helper function formatting the date
+  * @argument { Date } date to be formatted 
+  **/
+  formatDate(date) {
+    let hours = date.getHours();
+    let isPM = !!Math.floor(hours / 12);
+    let period = isPM ? 'PM' : 'AM';
+    let minutes = date.getMinutes();
+    hours = isPM ? hours % 12 : hours;
+    minutes = minutes >= 10 ? minutes : `0${minutes}`;
+
+    // Cases for midnight and midday
+    hours = hours === 0 ? 12 : hours;
+
+    return `${ hours }:${ minutes } ${ period }`;
   }
 };
