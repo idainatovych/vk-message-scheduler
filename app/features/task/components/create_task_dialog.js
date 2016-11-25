@@ -27,7 +27,24 @@ class CreateTaskDialog extends React.Component {
 
     // Initialize it only once
     this._onCreate = () => {
-      this.props.onCreate(this.task);
+      let {
+        title,
+        recipient,
+        date,
+        time,
+        repeatEveryWeek,
+        repeatEveryDay
+      } = this.task;
+
+      date.setHours(time.getHours(), time.getMinutes());
+
+      this.props.onCreate({
+        title,
+        recipient,
+        date,
+        repeatEveryDay,
+        repeatEveryWeek
+      });
       this.task = Object.assign({}, defaultTask);
     };
 

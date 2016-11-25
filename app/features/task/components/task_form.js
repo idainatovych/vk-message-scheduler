@@ -35,6 +35,7 @@ class CreateTaskForm extends React.Component {
     }
 
     onDateChange(e, date) {
+      date.setHours(0, 0, 0, 0);
       let task = Object.assign(this.state.task, { date });
       this.setState({ task });
     }
