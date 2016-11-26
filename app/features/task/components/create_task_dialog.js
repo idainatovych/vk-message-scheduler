@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { closeCreateTaskDialog } from '../../app/actions';
 import { createTask, resetTask, validate } from '../actions';
 import validation from './validation';
+import AbstractTaskDialog from './abstract_task_dialog';
 import TaskForm from './task_form';
 
 const styles = {
   maxWidth: '400px'
 };
 
-class CreateTaskDialog extends React.Component {
+class CreateTaskDialog extends AbstractTaskDialog {
   constructor(props) {
     super(props);
 
@@ -45,6 +45,8 @@ class CreateTaskDialog extends React.Component {
       });
     };
 
+    this.title = "Create Task";
+
     this.actions = [
       <FlatButton label="Cancel"
                   onTouchTap={props.onClose}/>,
@@ -54,19 +56,14 @@ class CreateTaskDialog extends React.Component {
   }
 
   render() {
-    return (
-      <Dialog modal={true}
-              title="Create Task"
-              actions={this.actions}
-              open={this.props.open}
-              contentStyle={styles}>
-        <TaskForm />
-      </Dialog>
-    );
+    let form = <TaskForm task={this.task}/>;
+    return this.getDialog(form);
   }
 }
 
-const mapStateToProps = state => ({
+CreateTaskDialog.propTypes = AbstractTaskDialog.propTypes;
+
+const mapStateToProps = (state) => ({
   open: state.app.isCreateTaskDialogOpen,
   newTask: state.tasks.newTask
 });
