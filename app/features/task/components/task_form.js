@@ -16,33 +16,46 @@ import {
   repeatEveryWeek
 } from '../actions';
 
-const CreateTaskForm = (props) => (
-  <div className="form">
-    <TextField
-        hintText="Title"
-        floatingLabelText="Title"
-        onChange={ props.onTitleChange } />
-    <AutoComplete
-        hintText="Recipient"
-        dataSource={ props.recipientList }
-        onNewRequest={ props.onRecipientChange } />
-    <DatePicker
-        hintText="Date of message"
-        onChange={ props.onDateChange } />
-    <TimePicker
-        hintText="Time of the message"
-        onChange={ props.onTimeChange } />
-    <Toggle
-        label="Repeat every day"
-        onToggle={ props.onRepeatEveryDayToggle }/>
-    <Toggle
-        label="Repeat every week"
-        onToggle={ props.onRepeatEveryWeekToggle }/>
-  </div>
-);
+class TaskForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="form">
+        <TextField
+          hintText="Title"
+          errorText={ this.props.validation.title }
+          floatingLabelText="Title"
+          onChange={ this.props.onTitleChange }/>
+        <AutoComplete
+          hintText="Recipient"
+          errorText={ this.props.validation.recipient }
+          dataSource={ this.props.recipientList }
+          onNewRequest={ this.props.onRecipientChange }/>
+        <DatePicker
+          hintText="Date of message"
+          errorText={ this.props.validation.date }
+          onChange={ this.props.onDateChange }/>
+        <TimePicker
+          hintText="Time of the message"
+          errorText={ this.props.validation.time }
+          onChange={ this.props.onTimeChange }/>
+        <Toggle
+          label="Repeat every day"
+          onToggle={ this.props.onRepeatEveryDayToggle }/>
+        <Toggle
+          label="Repeat every week"
+          onToggle={ this.props.onRepeatEveryWeekToggle }/>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
-  recipientList: state.connections
+  recipientList: state.connections,
+  validation: state.tasks.validation
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -55,4 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

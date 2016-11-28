@@ -4,7 +4,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { closeCreateTaskDialog } from '../../app/actions';
-import { createTask } from '../actions';
+import { createTask, validate } from '../actions';
+import validation from './validation';
 import TaskForm from './task_form';
 
 const styles = {
@@ -18,6 +19,13 @@ class CreateTaskDialog extends React.Component {
 
     // Initialize it only once
     this._onCreate = () => {
+      const validate = validation(this.props.newTask);
+
+      if (validate.invalid) {
+        this.props.onValidation(validate);
+        return;
+      }
+
       let {
         title,
         recipient,
@@ -42,7 +50,7 @@ class CreateTaskDialog extends React.Component {
       <FlatButton label="Cancel"
                   onTouchTap={props.onClose}/>,
       <FlatButton label="Create" primary={true}
-                    onTouchTap={this._onCreate}/>
+                  onTouchTap={this._onCreate}/>
     ];
   }
 
@@ -59,14 +67,15 @@ class CreateTaskDialog extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   open: state.app.isCreateTaskDialogOpen,
   newTask: state.tasks.newTask
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => closeCreateTaskDialog(dispatch),
-  onCreate: (task) => {
+  onValidation: value => validate(dispatch, value),
+  onCreate: task => {
     createTask(dispatch, task);
     closeCreateTaskDialog(dispatch);
   }

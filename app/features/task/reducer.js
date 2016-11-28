@@ -2,6 +2,7 @@ import TaskActionKeys from './keys';
 
 const defaultState = {
   tasks: [],
+  validation: {},
   newTask: {
     title: '',
     recipient: '',
@@ -16,6 +17,8 @@ export default function(state = defaultState, action) {
   switch(action.type) {
     case TaskActionKeys.CREATE_TASK:
       return state.tasks.concat(action.task);
+    case TaskActionKeys.VALIDATE:
+      return Object.assign({}, state, {validation: action.validation});
     case TaskActionKeys.TITLE_CHANGED:
       return Object.assign({}, state.newTask, {title: action.title});
     case TaskActionKeys.RECIPIENT_CHANGED:

@@ -6,6 +6,14 @@ export function createTask(dispatch, task) {
     task
   });
 }
+
+export function validate(dispatch, validation) {
+  dispatch({
+    type: TaskActionKeys.VALIDATE,
+    validation
+  });
+}
+
 export function titleChanged(dispatch, title) {
   dispatch({
     type: TaskActionKeys.TITLE_CHANGED,
