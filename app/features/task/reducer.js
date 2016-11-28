@@ -17,23 +17,17 @@ export default function(state = defaultState, action) {
     case TaskActionKeys.CREATE_TASK:
       return state.tasks.concat(action.task);
     case TaskActionKeys.TITLE_CHANGED:
-      state.newTask.title = action.title;
-      return Object.assign({}, state);
+      return Object.assign({}, state.newTask, {title: action.title});
     case TaskActionKeys.RECIPIENT_CHANGED:
-      state.newTask.recipient = action.recipient;
-      return Object.assign({}, state);
+      return Object.assign({}, state.newTask, {title: action.recipient});
     case TaskActionKeys.DATE_CHANGED:
-      state.newTask.date = action.date;
-      return Object.assign({}, state);
+      return Object.assign({}, state.newTask, {title: action.date});
     case TaskActionKeys.TIME_CHANGED:
-      state.newTask.time = action.time;
-      return Object.assign({}, state);
+      return Object.assign({}, state.newTask, {title: action.time});
     case TaskActionKeys.REPEAT_EVERY_DAY:
-      state.newTask.repeatEveryDay = action.repeatEveryDay;
-      return Object.assign({}, state);
+      return Object.assign({}, state.newTask, {title: action.repeatEveryDay});
     case TaskActionKeys.REPEAT_EVERY_WEEK:
-      state.newTask.repeatEveryWeek = action.repeatEveryWeek;
-      return Object.assign({}, state);
+      return Object.assign({}, state.newTask, {title: action.repeatEveryWeek});
     default:
       return state;
   }
