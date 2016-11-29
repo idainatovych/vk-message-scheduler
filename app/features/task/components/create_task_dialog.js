@@ -76,6 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
   onValidation: value => validate(dispatch, value),
   onCreate: task => {
     createTask(dispatch, task);
+    resetTask(dispatch);
     closeCreateTaskDialog(dispatch);
   }
 });

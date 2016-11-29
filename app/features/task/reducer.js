@@ -1,26 +1,28 @@
 import TaskActionKeys from './keys';
 
-const defaultState = {
-  tasks: [],
-  validation: {},
-  newTask: {
-    title: '',
-    recipient: '',
-    date: null,
-    time: null,
-    repeatEveryDay: false,
-    repeatEveryWeek: false
-  }
+const defaultTask = {
+  title: '',
+  recipient: '',
+  date: null,
+  time: null,
+  repeatEveryDay: false,
+  repeatEveryWeek: false
 };
 
-export default function (state = defaultState, action) {
+const initialState = {
+  tasks: [],
+  validation: {},
+  newTask: Object.assign({}, defaultTask)
+};
+
+export default function (state = Object.assign({}, initialState), action) {
   switch (action.type) {
     case TaskActionKeys.CREATE_TASK:
-      return state.tasks.concat(action.task);
+      return Object.assign({}, state, { tasks: state.tasks.concat(action.task) });
     case TaskActionKeys.VALIDATE:
-      return Object.assign({}, state, { validation: Object.assign({}, action.validation) });
+      return Object.assign({}, state, { validation: action.validation });
     case TaskActionKeys.RESET:
-      return Object.assign({}, state, defaultState);
+      return Object.assign({}, state, { newTask: Object.assign({}, defaultTask) });
     case TaskActionKeys.TITLE_CHANGED:
       return Object.assign({}, state, { newTask: Object.assign(state.newTask, { title: action.title }) });
     case TaskActionKeys.RECIPIENT_CHANGED:
