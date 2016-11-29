@@ -4,14 +4,13 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import { closeCreateTaskDialog } from '../../app/actions';
-import { createTask, validate } from '../actions';
+import { createTask, resetTask, validate } from '../actions';
 import validation from './validation';
 import TaskForm from './task_form';
 
 const styles = {
   maxWidth: '400px'
 };
-
 
 class CreateTaskDialog extends React.Component {
   constructor(props) {
@@ -21,10 +20,10 @@ class CreateTaskDialog extends React.Component {
     this._onCreate = () => {
       const validate = validation(this.props.newTask);
 
-      if (validate.invalid) {
-        this.props.onValidation(validate);
-        return;
-      }
+      // if (validate.invalid) {
+      //   this.props.onValidation(validate);
+      //   return;
+      // }
 
       let {
         title,

@@ -7,6 +7,12 @@ export function createTask(dispatch, task) {
   });
 }
 
+export function resetTask(dispatch) {
+  dispatch({
+    type: TaskActionKeys.RESET,
+  });
+}
+
 export function validate(dispatch, validation) {
   dispatch({
     type: TaskActionKeys.VALIDATE,
