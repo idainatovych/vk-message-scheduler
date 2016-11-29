@@ -15,18 +15,18 @@ const initialState = {
   newTask: Object.assign({}, defaultTask)
 };
 
-export default function (state = Object.assign({}, initialState), action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case TaskActionKeys.CREATE_TASK:
       return Object.assign({}, state, { tasks: state.tasks.concat(action.task) });
     case TaskActionKeys.VALIDATE:
       return Object.assign({}, state, { validation: action.validation });
     case TaskActionKeys.RESET:
-      return Object.assign({}, state, { newTask: Object.assign({}, defaultTask) });
+      return Object.assign({}, state, { newTask: Object.assign({}, defaultTask) }, { validation: {} });
     case TaskActionKeys.TITLE_CHANGED:
       return Object.assign({}, state, { newTask: Object.assign(state.newTask, { title: action.title }) });
     case TaskActionKeys.RECIPIENT_CHANGED:
-      return Object.assign({}, state, { newTask: Object.assign(state.newTask, { recipient: action.recipient }) });
+      return Object.assign({}, state, { newTask: Object.assign(state.newTask, { recipient: action.name }) });
     case TaskActionKeys.DATE_CHANGED:
       return Object.assign({}, state, { newTask: Object.assign(state.newTask, { date: action.date }) });
     case TaskActionKeys.TIME_CHANGED:

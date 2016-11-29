@@ -20,10 +20,10 @@ class CreateTaskDialog extends React.Component {
     this._onCreate = () => {
       const validate = validation(this.props.newTask);
 
-      // if (validate.invalid) {
-      //   this.props.onValidation(validate);
-      //   return;
-      // }
+      if (validate.invalid) {
+        this.props.onValidation(validate);
+        return;
+      }
 
       let {
         title,

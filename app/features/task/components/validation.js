@@ -19,12 +19,12 @@ const rules = {
   }
 };
 
-const required = value => !value ? '' : `Please enter ${value}`;
+const required = (value, key) => value ? '' : `Please enter ${key}`;
 
-const checkInvalid = validate => {
-  for(const rule in validate){
-    if(validate.hasOwnProperty(rule)) {
-      if(rule){
+const checkInvalid = (validate) => {
+  for (const rule in validate) {
+    if (validate.hasOwnProperty(rule) && rule !== 'invalid') {
+      if (validate[rule]) {
         validate.invalid = true;
         break;
       }
@@ -34,12 +34,12 @@ const checkInvalid = validate => {
 
 export default function (task) {
   const validate = {
-    invalid: false
+    invalid: false,
   };
   for (const item in task) {
-    if(task.hasOwnProperty(item)){
+    if (task.hasOwnProperty(item)) {
       if (rules[item].required) {
-        validate[item] = required(item);
+        validate[item] = required(task[item], item);
       }
     }
   }
