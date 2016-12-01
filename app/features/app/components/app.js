@@ -10,7 +10,7 @@ import { Backdrop } from '../../utils';
 import {
   ScheduleTaskButton,
   TaskCollection,
-  CreateTaskDialog
+  CreateTaskDialog,
 } from '../../task';
 
 // Actions
@@ -25,7 +25,7 @@ const className = 'muidocs-icon-navigation-expand-more';
 const App = (props) => (
   <MuiThemeProvider>
     <div>
-      <CreateTaskDialog/>
+      <CreateTaskDialog />
       <AppBar title="VK Scheduler"
               iconClassNameRight={className}
               onLeftIconButtonTouchTap={props.openMenu}/>

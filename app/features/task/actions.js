@@ -59,5 +59,17 @@ export function repeatEveryWeek(dispatch, repeat) {
   dispatch({
     type: TaskActionKeys.REPEAT_EVERY_WEEK,
     repeat
+
+export function updateTask(dispatch, task) {
+  dispatch({
+    type: TaskActionKeys.UPDATE_TASK,
+    task
+  });
+}
+
+export function deleteTask(dispatch, task) {
+  dispatch({
+    type: TaskActionKeys.DELETE_TASK,
+    id: task.id
   });
 }

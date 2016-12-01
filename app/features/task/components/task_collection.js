@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { GridList, GridTile } from 'material-ui/GridList';
+import {
+  GridList,
+  GridTile
+} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
-import { helpers } from '../../utils';
 
-const iconButton = <IconButton><ActionInfo color="white"/></IconButton>;
+import EditTaskDialog from './edit_task_dialog';
+import { actions, app } from '../../app';
+import { helpers } from '../../utils';
 
 const DAYS_OF_WEEK = [
   'Sunday',
@@ -35,6 +39,7 @@ const MONTHS = [
 ];
 
 class TaskCollection extends React.Component {
+
   _renderSchedule() {
     if (this.props.tasks.length > 0) {
       let tasks = this.props.tasks.sort((a, b) => a.date > b.date);
@@ -67,6 +72,7 @@ class TaskCollection extends React.Component {
 
   static _renderTile(task) {
     let {
+      id,
       title,
       date,
       recipient
@@ -75,21 +81,33 @@ class TaskCollection extends React.Component {
     let formattedDate = helpers.formatDate(date);
     let subtitle = `${ recipient } at ${formattedDate}`;
 
+
     return (
-      <GridTile key={ helpers.generateId() } title={ title }
-                actionIcon={ iconButton }
+      <GridTile key={ id } title={ title }
+                actionIcon={ this._getActionIcon(id) }
                 subtitle={ subtitle }>
         <img src="http://lorempixel.com/300/300/cats"/>
       </GridTile>
     );
   }
 
+  _getActionIcon(id) {
+    return (
+      <IconButton onTouchTap={ () => this.props.openEditTaskDialog(id) }>
+        <ActionInfo color="white"/>
+      </IconButton>
+    );
+  }
+
   render() {
     return (
-      <div className="task-collection">
-        <GridList>
-          { this._renderSchedule() }
-        </GridList>
+      <div>
+        <div className="task-collection">
+          <GridList>
+            { this._renderSchedule() }
+          </GridList>
+        </div>
+        <EditTaskDialog />
       </div>
     );
   }
@@ -99,6 +117,8 @@ const mapStateToProps = (state) => ({
   tasks: state.tasks.tasks
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  openEditTaskDialog: (id) => actions.openEditTaskDialog(dispatch, id)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskCollection);

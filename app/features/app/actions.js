@@ -12,6 +12,19 @@ export function closeCreateTaskDialog(dispatch) {
   });
 }
 
+export function openEditTaskDialog(dispatch, id) {
+  dispatch({
+    type: AppActionKeys.OPEN_EDIT_TASK_DIALOG,
+    id
+  });
+}
+
+export function closeEditTaskDialog(dispatch) {
+  dispatch({
+    type: AppActionKeys.CLOSE_EDIT_TASK_DIALOG
+  });
+}
+
 export function openMenu(dispatch) {
   dispatch({
     type: AppActionKeys.OPEN_MENU
