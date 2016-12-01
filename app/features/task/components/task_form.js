@@ -7,84 +7,65 @@ import TimePicker from 'material-ui/TimePicker';
 import Toggle from 'material-ui/Toggle';
 import AutoComplete from 'material-ui/AutoComplete';
 
-class CreateTaskForm extends React.Component {
-    constructor(props) {
-      super(props);
-      const { task } = this.props;
+import {
+  titleChanged,
+  recipientChanged,
+  dateChanged,
+  timeChanged,
+  repeatEveryDay,
+  repeatEveryWeek
+} from '../actions';
 
-      // Save reference to the task object
-      this.state = { task };
+class TaskForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-      // Bind methods to instance
-      this._onTitleChange = this.onTitleChange.bind(this);
-      this._onRecipientChange = this.onRecipientChange.bind(this);
-      this._onDateChange = this.onDateChange.bind(this);
-      this._onTimeChange = this.onTimeChange.bind(this);
-      this._onRepeatEveryDayToggle = this.onRepeatEveryDayToggle.bind(this);
-      this._onRepeatEveryWeekToggle = this.onRepeatEveryWeekToggle.bind(this);
-    }
-
-    onTitleChange(e, title) {
-      let task = Object.assign(this.state.task, { title });
-      this.setState({ task })
-    }
-
-    onRecipientChange(recipient, index) {
-      let task = Object.assign(this.state.task, { recipient });
-      this.setState({ task });
-    }
-
-    onDateChange(e, date) {
-      let task = Object.assign(this.state.task, { date });
-      this.setState({ task });
-    }
-
-    onTimeChange(e, time) {
-      let task = Object.assign(this.state.task, { time });
-      this.setState({ task });
-    }
-
-    onRepeatEveryDayToggle(e, repeatEveryDay) {
-      let task = Object.assign(this.state.task, { repeatEveryDay });
-      this.setState({ task });
-    }
-
-    onRepeatEveryWeekToggle(e, repeatEveryWeek) {
-      let task = Object.assign(this.state.task, { repeatEveryWeek });
-      this.setState({ task });
-    }
-
-    render() {
-      return (
-        <div className="form">
-          <TextField
-              hintText="Title"
-              floatingLabelText="Title"
-              onChange={ this._onTitleChange } />
-          <AutoComplete
-              hintText="Recipient"
-              dataSource={ this.props.recipientList }
-              onNewRequest={ this._onRecipientChange } />
-          <DatePicker
-              hintText="Date of message"
-              onChange={ this._onDateChange } />
-          <TimePicker
-              hintText="Time of the message"
-              onChange={ this._onTimeChange } />
-          <Toggle
-              label="Repeat every day"
-              onToggle={ this._onRepeatEveryDayToggle }/>
-          <Toggle
-              label="Repeat every week"
-              onToggle={ this._onRepeatEveryWeekToggle }/>
-        </div>
-      );
-    }
+  render() {
+    return (
+      <div className="form">
+        <TextField
+          hintText="Title"
+          errorText={ this.props.validation.title }
+          floatingLabelText="Title"
+          onChange={ this.props.onTitleChange }/>
+        <AutoComplete
+          hintText="Recipient"
+          errorText={ this.props.validation.recipient }
+          dataSource={ this.props.recipientList }
+          onNewRequest={ this.props.onRecipientChange }/>
+        <DatePicker
+          hintText="Date of message"
+          errorText={ this.props.validation.date }
+          onChange={ this.props.onDateChange }/>
+        <TimePicker
+          hintText="Time of the message"
+          errorText={ this.props.validation.time }
+          onChange={ this.props.onTimeChange }/>
+        <Toggle
+          label="Repeat every day"
+          onToggle={ this.props.onRepeatEveryDayToggle }/>
+        <Toggle
+          label="Repeat every week"
+          onToggle={ this.props.onRepeatEveryWeekToggle }/>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   recipientList: state.connections,
-  task: ownProps.task
+  validation: state.tasks.validation
 });
 
-export default connect(mapStateToProps)(CreateTaskForm);
+const mapDispatchToProps = (dispatch) => ({
+  onTitleChange: (e, value) => titleChanged(dispatch, value),
+  onRecipientChange: (select, index) => recipientChanged(dispatch, select),
+  onDateChange: (e, date) => dateChanged(dispatch, date),
+  onTimeChange: (e, date) => timeChanged(dispatch, date),
+  onRepeatEveryDayToggle: (e, toggled) => repeatEveryDay(dispatch, toggled),
+  onRepeatEveryWeekToggle: (e, toggled) => repeatEveryWeek(dispatch, toggled)
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

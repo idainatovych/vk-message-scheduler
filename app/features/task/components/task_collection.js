@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import { helpers } from '../../utils';
 
-const iconButton = <IconButton><ActionInfo color="white"/></IconButton>
+const iconButton = <IconButton><ActionInfo color="white"/></IconButton>;
 
 const DAYS_OF_WEEK = [
   'Sunday',
@@ -60,12 +60,12 @@ class TaskCollection extends React.Component {
         acc.push(<Subheader key={ helpers.generateId() }>{ text }</Subheader>);
       }
 
-      acc.push(this._renderTile(task));
+      acc.push(TaskCollection._renderTile(task));
       return acc;
     }, []);
   }
 
-  _renderTile(task) {
+  static _renderTile(task) {
     let {
       title,
       date,
@@ -96,7 +96,7 @@ class TaskCollection extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: state.tasks
+  tasks: state.tasks.tasks
 });
 
 const mapDispatchToProps = (dispatch) => ({});
