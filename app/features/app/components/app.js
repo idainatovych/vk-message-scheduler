@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
 
 // Custom components
 import AppMenu from './app_menu';

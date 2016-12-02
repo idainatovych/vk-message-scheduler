@@ -1,5 +1,11 @@
-export App from './components/app';
-export AppMenu from './components/app_menu';
-export app from './reducer';
-export keys from './keys';
-export * as actions from './actions';
+import App from './components/app';
+import app from './reducer';
+import AppActionKeys from './keys';
+import * as actions from './actions';
+
+export {
+  App as App,
+  app as app,
+  AppActionKeys as AppActionKeys,
+  actions as actions
+}

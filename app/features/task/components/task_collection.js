@@ -65,12 +65,12 @@ class TaskCollection extends React.Component {
         acc.push(<Subheader key={ helpers.generateId() }>{ text }</Subheader>);
       }
 
-      acc.push(TaskCollection._renderTile(task));
+      acc.push(this._renderTile(task));
       return acc;
     }, []);
   }
 
-  static _renderTile(task) {
+  _renderTile(task) {
     let {
       id,
       title,
@@ -79,7 +79,7 @@ class TaskCollection extends React.Component {
     } = task;
 
     let formattedDate = helpers.formatDate(date);
-    let subtitle = `${ recipient } at ${formattedDate}`;
+    let subtitle = `${recipient} at ${formattedDate}`;
 
 
     return (

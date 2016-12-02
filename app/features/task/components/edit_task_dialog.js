@@ -15,7 +15,7 @@ class EditTaskDialog extends AbstractTaskDialog {
     super(props);
 
     this.title = 'Edit task';
-    this._onDelete = this.onDelete.bind(this);
+    this._onDelete = this._onDelete.bind(this);
 
     this.actions = [
       <FlatButton label="Cancel"
@@ -28,11 +28,10 @@ class EditTaskDialog extends AbstractTaskDialog {
                   onTouchTap={ props.onUpdate } />
     ];
 
-    console.log('props', this.props);
     this.task = Object.assign({}, this.props.task);
   }
 
-  onDelete() {
+  _onDelete() {
     let {
       onDelete,
       task
@@ -47,13 +46,8 @@ class EditTaskDialog extends AbstractTaskDialog {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  task: state.tasks.reduce((acc, el) => {
-    if (el.id === ownProps.taskId) {
-      acc = el;
-    }
-    return acc;
-  }, null),
+const mapStateToProps = (state) => ({
+  task: state.tasks.currentTask,
   open: state.app.isEditTaskDialogOpen
 });
 
@@ -63,8 +57,8 @@ const mapDispatchToProps = (dispatch) => ({
     updateTask(dispatch, task);
     actions.closeEditTaskDialog(dispatch);
   },
-  onDelete: (task) => {
-    deleteTask(dispatch, task.id);
+  onDelete: (id) => {
+    deleteTask(dispatch, id);
     actions.closeEditTaskDialog(dispatch);
   }
 });

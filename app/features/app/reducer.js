@@ -26,13 +26,11 @@ export default (state = defaultState, action) => {
       });
     case AppActionKeys.OPEN_EDIT_TASK_DIALOG:
       return Object.assign({}, state, {
-        isEditTaskDialogOpen: true,
-        editTaskId: action.id
+        isEditTaskDialogOpen: true
       });
     case AppActionKeys.CLOSE_EDIT_TASK_DIALOG:
       return Object.assign({}, state, {
-        isEditTaskDialogOpen: false,
-        editTaskId: null
+        isEditTaskDialogOpen: false
       });
     default:
       return state;

@@ -4,7 +4,8 @@ import scheduleTaskButton from './components/schedule_task_button';
 import taskCollection from './components/task_collection';
 import taskForm from './components/task_form';
 
-import reducer from './reducer';
+import * as middlewares from './middlewares';
+import reducer from './reducers';
 
 export {
   editTaskDialog as EditTaskDialog,
@@ -12,5 +13,6 @@ export {
   scheduleTaskButton as ScheduleTaskButton,
   taskCollection as TaskCollection,
   taskForm as TaskForm,
-  reducer as tasks
+  reducer as tasks,
+  middlewares as tasksMiddlewares
 };

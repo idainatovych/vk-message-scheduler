@@ -18,7 +18,7 @@ class CreateTaskDialog extends AbstractTaskDialog {
 
     // Initialize it only once
     this._onCreate = () => {
-      const validate = validation(this.props.newTask);
+      const validate = validation(this.props.currentTask);
 
       if (validate.invalid) {
         this.props.onValidation(validate);
@@ -32,7 +32,7 @@ class CreateTaskDialog extends AbstractTaskDialog {
         time,
         repeatEveryWeek,
         repeatEveryDay
-      } = this.props.newTask;
+      } = this.props.currentTask;
 
       date.setHours(time.getHours(), time.getMinutes());
 
@@ -65,7 +65,7 @@ CreateTaskDialog.propTypes = AbstractTaskDialog.propTypes;
 
 const mapStateToProps = (state) => ({
   open: state.app.isCreateTaskDialogOpen,
-  newTask: state.tasks.newTask
+  currentTask: state.tasks.currentTask
 });
 
 const mapDispatchToProps = (dispatch) => ({
