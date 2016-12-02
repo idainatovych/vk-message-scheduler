@@ -54,8 +54,7 @@ class CreateTaskDialog extends AbstractTaskDialog {
   }
 
   render() {
-    let form = <TaskForm />;
-    return this.getDialog(form);
+    return this.getDialog(<TaskForm />);
   }
 }
 

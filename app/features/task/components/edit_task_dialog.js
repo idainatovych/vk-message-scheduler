@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 
 import { AppActions } from '../../app';
-import { editTask, validate } from '../actions';
 import {
   deleteTask,
-  updateTask
+  updateTask,
+  validate
 } from '../actions';
 import validation from './validation';
 import AbstractTaskDialog from './abstract_task_dialog';
@@ -68,15 +68,14 @@ class EditTaskDialog extends AbstractTaskDialog {
   _onDelete() {
     let {
       onDelete,
-      task
+      currentTask
     } = this.props;
 
-    onDelete(task.id)
+    onDelete(currentTask.id);
   }
 
   render() {
-    let form = <TaskForm />
-    return this.getDialog(form);
+    return this.getDialog(<TaskForm />);
   }
 }
 
