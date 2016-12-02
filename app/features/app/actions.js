@@ -1,4 +1,5 @@
 import AppActionKeys from './keys';
+import { TaskActions } from '../task';
 
 export function openCreateTaskDialog(dispatch) {
   dispatch({
@@ -10,6 +11,8 @@ export function closeCreateTaskDialog(dispatch) {
   dispatch({
     type: AppActionKeys.CLOSE_CREATE_TASK_DIALOG
   });
+
+  TaskActions.resetTask(dispatch);
 }
 
 export function openEditTaskDialog(dispatch, id) {
@@ -23,6 +26,8 @@ export function closeEditTaskDialog(dispatch) {
   dispatch({
     type: AppActionKeys.CLOSE_EDIT_TASK_DIALOG
   });
+
+  TaskActions.resetTask(dispatch);
 }
 
 export function openMenu(dispatch) {

@@ -10,7 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
 import EditTaskDialog from './edit_task_dialog';
-import { actions, app } from '../../app';
+import { AppActions, app } from '../../app';
 import { helpers } from '../../utils';
 
 const DAYS_OF_WEEK = [
@@ -118,7 +118,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openEditTaskDialog: (id) => actions.openEditTaskDialog(dispatch, id)
+  openEditTaskDialog: (id) => AppActions.openEditTaskDialog(dispatch, id)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskCollection);

@@ -5,6 +5,7 @@ import taskCollection from './components/task_collection';
 import taskForm from './components/task_form';
 
 import * as middlewares from './middlewares';
+import * as actions from './actions';
 import reducer from './reducers';
 
 export {
@@ -14,5 +15,6 @@ export {
   taskCollection as TaskCollection,
   taskForm as TaskForm,
   reducer as tasks,
+  actions as TaskActions,
   middlewares as tasksMiddlewares
 };

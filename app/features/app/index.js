@@ -7,5 +7,5 @@ export {
   App as App,
   app as app,
   AppActionKeys as AppActionKeys,
-  actions as actions
+  actions as AppActions
 }

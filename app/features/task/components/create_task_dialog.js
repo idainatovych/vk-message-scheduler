@@ -2,51 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 
-import { closeCreateTaskDialog } from '../../app/actions';
-import { createTask, resetTask, validate } from '../actions';
+import { AppActions } from '../../app';
+import { createTask, validate } from '../actions';
 import validation from './validation';
 import AbstractTaskDialog from './abstract_task_dialog';
 import TaskForm from './task_form';
-
-const styles = {
-  maxWidth: '400px'
-};
 
 class CreateTaskDialog extends AbstractTaskDialog {
   constructor(props) {
     super(props);
 
-    // Initialize it only once
-    this._onCreate = () => {
-      const validate = validation(this.props.currentTask);
-
-      if (validate.invalid) {
-        this.props.onValidation(validate);
-        return;
-      }
-
-      let {
-        title,
-        recipient,
-        date,
-        time,
-        repeatEveryWeek,
-        repeatEveryDay
-      } = this.props.currentTask;
-
-      date.setHours(time.getHours(), time.getMinutes());
-
-      this.props.onCreate({
-        title,
-        recipient,
-        date,
-        repeatEveryDay,
-        repeatEveryWeek
-      });
-    };
+    // Bind methods
+    this._onCreate = this._onCreate.bind(this);
 
     this.title = "Create Task";
-
     this.actions = [
       <FlatButton label="Cancel"
                   onTouchTap={props.onClose}/>,
@@ -55,8 +24,37 @@ class CreateTaskDialog extends AbstractTaskDialog {
     ];
   }
 
+  _onCreate() {
+    const validate = validation(this.props.currentTask);
+
+    if (Object.keys(validate).length) {
+      this.props.onValidation(validate);
+      return;
+    }
+
+    let {
+      title,
+      recipient,
+      date,
+      time,
+      repeatEveryWeek,
+      repeatEveryDay
+    } = this.props.currentTask;
+
+    date.setHours(time.getHours(), time.getMinutes());
+
+    this.props.onCreate({
+      title,
+      recipient,
+      date,
+      time,
+      repeatEveryDay,
+      repeatEveryWeek
+    });
+  }
+
   render() {
-    let form = <TaskForm task={this.task}/>;
+    let form = <TaskForm />;
     return this.getDialog(form);
   }
 }
@@ -69,12 +67,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClose: () => closeCreateTaskDialog(dispatch),
+  onClose: () => AppActions.closeCreateTaskDialog(dispatch),
   onValidation: value => validate(dispatch, value),
   onCreate: task => {
     createTask(dispatch, task);
-    resetTask(dispatch);
-    closeCreateTaskDialog(dispatch);
+    AppActions.closeCreateTaskDialog(dispatch);
   }
 });
 

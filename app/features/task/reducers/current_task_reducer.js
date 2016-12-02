@@ -37,12 +37,12 @@ export default function currentTask(state = Object.assign({}, defaultTask), acti
 
     case TaskActionKeys.REPEAT_EVERY_DAY:
       return Object.assign({}, state, {
-        repeatEveryDay: action.repeatEveryDay
+        repeatEveryDay: action.repeat
       });
 
     case TaskActionKeys.REPEAT_EVERY_WEEK:
       return Object.assign({}, state, {
-        repeatEveryWeek: action.repeatEveryWeek
+        repeatEveryWeek: action.repeat
       });
 
     case AppActionKeys.OPEN_EDIT_TASK_DIALOG:
