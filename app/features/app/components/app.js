@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
 
 // Custom components
 import AppMenu from './app_menu';
@@ -10,7 +9,7 @@ import { Backdrop } from '../../utils';
 import {
   ScheduleTaskButton,
   TaskCollection,
-  CreateTaskDialog
+  CreateTaskDialog,
 } from '../../task';
 
 // Actions
@@ -25,7 +24,7 @@ const className = 'muidocs-icon-navigation-expand-more';
 const App = (props) => (
   <MuiThemeProvider>
     <div>
-      <CreateTaskDialog/>
+      <CreateTaskDialog />
       <AppBar title="VK Scheduler"
               iconClassNameRight={className}
               onLeftIconButtonTouchTap={props.openMenu}/>

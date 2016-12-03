@@ -61,3 +61,17 @@ export function repeatEveryWeek(dispatch, repeat) {
     repeat
   });
 }
+
+export function updateTask(dispatch, task) {
+  dispatch({
+    type: TaskActionKeys.UPDATE_TASK,
+    task
+  });
+}
+
+export function deleteTask(dispatch, id) {
+  dispatch({
+    type: TaskActionKeys.DELETE_TASK,
+    id
+  });
+}

@@ -28,26 +28,32 @@ class TaskForm extends React.Component {
           hintText="Title"
           errorText={ this.props.validation.title }
           floatingLabelText="Title"
-          onChange={ this.props.onTitleChange }/>
+          onChange={ this.props.onTitleChange }
+          value={ this.props.currentTask.title } />
         <AutoComplete
           hintText="Recipient"
           errorText={ this.props.validation.recipient }
           dataSource={ this.props.recipientList }
-          onNewRequest={ this.props.onRecipientChange }/>
+          onNewRequest={ this.props.onRecipientChange }
+          searchText={ this.props.currentTask.recipient } />
         <DatePicker
           hintText="Date of message"
           errorText={ this.props.validation.date }
-          onChange={ this.props.onDateChange }/>
+          onChange={ this.props.onDateChange }
+          value={ this.props.currentTask.date } />
         <TimePicker
           hintText="Time of the message"
           errorText={ this.props.validation.time }
-          onChange={ this.props.onTimeChange }/>
+          onChange={ this.props.onTimeChange }
+          value={ this.props.currentTask.time } />
         <Toggle
           label="Repeat every day"
-          onToggle={ this.props.onRepeatEveryDayToggle }/>
+          onToggle={ this.props.onRepeatEveryDayToggle }
+          defaultToggled={ this.props.currentTask.repeatEveryDay } />
         <Toggle
           label="Repeat every week"
-          onToggle={ this.props.onRepeatEveryWeekToggle }/>
+          onToggle={ this.props.onRepeatEveryWeekToggle }
+          defaultToggled={ this.props.currentTask.repeatEveryWeek } />
       </div>
     );
   }
@@ -55,7 +61,8 @@ class TaskForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   recipientList: state.connections,
-  validation: state.tasks.validation
+  validation: state.tasks.validation,
+  currentTask: state.tasks.currentTask
 });
 
 const mapDispatchToProps = (dispatch) => ({

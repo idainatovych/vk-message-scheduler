@@ -2,7 +2,8 @@ import AppActionKeys from './keys';
 
 const defaultState = {
   isMenuOpen: false,
-  isCreateTaskDialogOpen: false
+  isCreateTaskDialogOpen: false,
+  isEditTaskDialogOpen: false,
 };
 
 export default (state = defaultState, action) => {
@@ -22,6 +23,14 @@ export default (state = defaultState, action) => {
     case AppActionKeys.CLOSE_CREATE_TASK_DIALOG:
       return Object.assign({}, state, {
         isCreateTaskDialogOpen: false
+      });
+    case AppActionKeys.OPEN_EDIT_TASK_DIALOG:
+      return Object.assign({}, state, {
+        isEditTaskDialogOpen: true
+      });
+    case AppActionKeys.CLOSE_EDIT_TASK_DIALOG:
+      return Object.assign({}, state, {
+        isEditTaskDialogOpen: false
       });
     default:
       return state;

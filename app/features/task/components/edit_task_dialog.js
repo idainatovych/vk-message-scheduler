@@ -3,28 +3,38 @@ import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 
 import { AppActions } from '../../app';
-import { createTask, validate } from '../actions';
+import {
+  deleteTask,
+  updateTask,
+  validate
+} from '../actions';
 import validation from './validation';
 import AbstractTaskDialog from './abstract_task_dialog';
 import TaskForm from './task_form';
 
-class CreateTaskDialog extends AbstractTaskDialog {
+
+class EditTaskDialog extends AbstractTaskDialog {
   constructor(props) {
     super(props);
+    this.title = 'Edit task';
 
     // Bind methods
-    this._onCreate = this._onCreate.bind(this);
+    this._onUpdate = this._onUpdate.bind(this);
+    this._onDelete = this._onDelete.bind(this);
 
-    this.title = "Create Task";
     this.actions = [
       <FlatButton label="Cancel"
-                  onTouchTap={props.onClose}/>,
-      <FlatButton label="Create" primary={true}
-                  onTouchTap={this._onCreate}/>
+                  onTouchTap={ props.onClose } />,
+      <FlatButton label="Delete"
+                  secondary={ true }
+                  onTouchTap={ this._onDelete } />,
+      <FlatButton label="Update"
+                  primary={ true }
+                  onTouchTap={ this._onUpdate } />
     ];
   }
 
-  _onCreate() {
+  _onUpdate() {
     const validate = validation(this.props.currentTask);
 
     if (Object.keys(validate).length) {
@@ -33,6 +43,7 @@ class CreateTaskDialog extends AbstractTaskDialog {
     }
 
     let {
+      id,
       title,
       recipient,
       date,
@@ -43,7 +54,8 @@ class CreateTaskDialog extends AbstractTaskDialog {
 
     date.setHours(time.getHours(), time.getMinutes());
 
-    this.props.onCreate({
+    this.props.onUpdate({
+      id,
       title,
       recipient,
       date,
@@ -53,25 +65,36 @@ class CreateTaskDialog extends AbstractTaskDialog {
     });
   }
 
+  _onDelete() {
+    let {
+      onDelete,
+      currentTask
+    } = this.props;
+
+    onDelete(currentTask.id);
+  }
+
   render() {
     return this.getDialog(<TaskForm />);
   }
 }
 
-CreateTaskDialog.propTypes = AbstractTaskDialog.propTypes;
-
 const mapStateToProps = (state) => ({
-  open: state.app.isCreateTaskDialogOpen,
+  open: state.app.isEditTaskDialogOpen,
   currentTask: state.tasks.currentTask
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClose: () => AppActions.closeCreateTaskDialog(dispatch),
+  onClose: () => AppActions.closeEditTaskDialog(dispatch),
   onValidation: value => validate(dispatch, value),
-  onCreate: task => {
-    createTask(dispatch, task);
-    AppActions.closeCreateTaskDialog(dispatch);
+  onUpdate: (task) => {
+    updateTask(dispatch, task);
+    AppActions.closeEditTaskDialog(dispatch);
+  },
+  onDelete: (id) => {
+    deleteTask(dispatch, id);
+    AppActions.closeEditTaskDialog(dispatch);
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(EditTaskDialog);

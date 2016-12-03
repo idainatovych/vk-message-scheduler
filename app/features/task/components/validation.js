@@ -1,48 +1,44 @@
+const validationFuncs = {
+  NON_EMPTY: (a) => {
+    return !!a.toString().length;
+  },
+  NOT_NULL: (a) => {
+    return a !== null;
+  }
+};
+
 const rules = {
   title: {
-    required: true
+    validate: validationFuncs.NON_EMPTY,
+    getMessage: key => required(key)
   },
   recipient: {
-    required: true
+    validate: validationFuncs.NON_EMPTY,
+    getMessage: key => required(key)
   },
   date: {
-    required: true
+    validate: validationFuncs.NOT_NULL,
+    getMessage: key => required(key)
   },
   time: {
-    required: true
-  },
-  repeatEveryDay: {
-    required: false
-  },
-  repeatEveryWeek: {
-    required: false
+    validate: validationFuncs.NOT_NULL,
+    getMessage: key => required(key)
   }
 };
 
-const required = (value, key) => value ? '' : `Please enter ${key}`;
+const required = key => `Please enter ${key}`;
 
-const checkInvalid = (validate) => {
-  for (const rule in validate) {
-    if (validate.hasOwnProperty(rule) && rule !== 'invalid') {
-      if (validate[rule]) {
-        validate.invalid = true;
-        break;
-      }
+export default function validation(task) {
+  const validate = {};
+
+  for (const item in rules) {
+    const rule = rules[item];
+    const value = task[item];
+
+    if (!rule.validate(value)) {
+      validate[item] = rule.getMessage(item);
     }
   }
-};
 
-export default function (task) {
-  const validate = {
-    invalid: false,
-  };
-  for (const item in task) {
-    if (task.hasOwnProperty(item)) {
-      if (rules[item].required) {
-        validate[item] = required(task[item], item);
-      }
-    }
-  }
-  checkInvalid(validate);
   return validate
 }
