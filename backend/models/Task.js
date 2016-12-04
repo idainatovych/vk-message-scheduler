@@ -14,7 +14,7 @@ const taskSchema = new Schema({
   date: {
     type: Date,
     required: true
-  }
+  },
   repeatEveryDay: Boolean,
   repeatEveryWeek: Boolean
 });

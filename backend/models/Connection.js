@@ -8,7 +8,7 @@ const connectionSchema = new Schema({
   },
   lastName: {
     type: String,
-    required: trueß
+    required: true
   }
 });
 

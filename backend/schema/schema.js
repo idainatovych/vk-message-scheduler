@@ -4,8 +4,9 @@ const {
 
 
 class Connection {
-  constructor(name = 'No name') {
-    this.name = name;
+  constructor(firstName = 'No name', lastName = '') {
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 }
 
@@ -14,11 +15,6 @@ class Task {
     this.title = title;
   }
 }
-
-const root = {
-  tasks: [new Task('first')],
-  connections: [new Connection('Illia'), new Connection('Dementor')]
-};
 
 const schema = buildSchema(`
   type Connection {
@@ -39,5 +35,6 @@ const schema = buildSchema(`
 
 module.exports = {
   schema,
-  root
+  Connection,
+  Task
 }
