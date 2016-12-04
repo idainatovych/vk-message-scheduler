@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // Custom components
 import AppMenu from './app_menu';
-import { Backdrop } from '../../utils';
+import Header from './header';
 import {
   ScheduleTaskButton,
   TaskCollection,
@@ -14,42 +13,50 @@ import {
 
 // Actions
 import {
-  openMenu,
-  closeMenu,
   openCreateTaskDialog
 } from '../actions';
 
-const className = 'muidocs-icon-navigation-expand-more';
+import {
+  Router,
+  Route,
+  browserHistory,
+  IndexRoute
+} from 'react-router';
 
-const App = (props) => (
-  <MuiThemeProvider>
-    <div>
-      <CreateTaskDialog />
-      <AppBar title="VK Scheduler"
-              iconClassNameRight={className}
-              onLeftIconButtonTouchTap={props.openMenu}/>
-      <div className="content-wrapper">
-        <h2 className="title">My Schedule</h2>
-        <TaskCollection/>
-        <AppMenu/>
-        <Backdrop open={props.isMenuOpen}
-                onClick={props.closeMenu}/>
-      </div>
-      <div className="action-area">
-        <ScheduleTaskButton onTouchTap={props.openCreateTaskDialog}/>
-      </div>
-    </div>
-  </MuiThemeProvider>
-);
+const Content = (props) => {
+  return <div className="content-wrapper">
+    <h2 className="title">My Schedule</h2>
+    <TaskCollection/>
+    <AppMenu/>
+    {props.children}
+  </div>
+};
 
-const mapStateToProps = (state) => ({
-  isMenuOpen: state.app.isMenuOpen,
-});
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <MuiThemeProvider>
+      <div>
+        {/*<CreateTaskDialog />*/}
+        <Router history={browserHistory}>
+          <Route path='/' component={Header}>
+            <IndexRoute ownProps={this.props} component={Content}/>
+            <Route path='create-task' component={CreateTaskDialog}/>
+          </Route>
+        </Router>
+        <div className="action-area">
+          <ScheduleTaskButton onTouchTap={this.props.openCreateTaskDialog}/>
+        </div>
+      </div>
+    </MuiThemeProvider>
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  openMenu: () => openMenu(dispatch),
-  closeMenu: () => closeMenu(dispatch),
   openCreateTaskDialog: () => openCreateTaskDialog(dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
