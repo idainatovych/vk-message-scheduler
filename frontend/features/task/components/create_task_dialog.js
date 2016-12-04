@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router';
 
 import { AppActions } from '../../app';
 import { createTask, validate } from '../actions';
@@ -17,10 +18,14 @@ class CreateTaskDialog extends AbstractTaskDialog {
 
     this.title = "Create Task";
     this.actions = [
-      <FlatButton label="Cancel"
-                  onTouchTap={props.onClose}/>,
-      <FlatButton label="Create" primary={true}
-                  onTouchTap={this._onCreate}/>
+      <Link to="/">
+        <FlatButton label="Cancel"
+                    onTouchTap={props.onClose}/>
+      </Link>,
+      <Link to="/">
+        <FlatButton label="Create" primary={true}
+                    onTouchTap={this._onCreate}/>
+      </Link>
     ];
   }
 

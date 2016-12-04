@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import {
   GridList,
@@ -93,9 +94,11 @@ class TaskCollection extends React.Component {
 
   _getActionIcon(id) {
     return (
-      <IconButton onTouchTap={ () => this.props.openEditTaskDialog(id) }>
-        <ActionInfo color="white"/>
-      </IconButton>
+      <Link to="/edit-task">
+        <IconButton onTouchTap={ () => this.props.openEditTaskDialog(id) }>
+          <ActionInfo color="white"/>
+        </IconButton>
+      </Link>
     );
   }
 

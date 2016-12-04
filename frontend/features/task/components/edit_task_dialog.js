@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router';
 
 import { AppActions } from '../../app';
 import {
@@ -23,14 +24,20 @@ class EditTaskDialog extends AbstractTaskDialog {
     this._onDelete = this._onDelete.bind(this);
 
     this.actions = [
-      <FlatButton label="Cancel"
-                  onTouchTap={ props.onClose } />,
-      <FlatButton label="Delete"
-                  secondary={ true }
-                  onTouchTap={ this._onDelete } />,
-      <FlatButton label="Update"
-                  primary={ true }
-                  onTouchTap={ this._onUpdate } />
+      <Link to="/">
+        <FlatButton label="Cancel"
+                    onTouchTap={ props.onClose }/>
+      </Link>,
+      <Link to="/">
+        <FlatButton label="Delete"
+                    secondary={ true }
+                    onTouchTap={ this._onDelete }/>
+      </Link>,
+      <Link to="/">
+        <FlatButton label="Update"
+                    primary={ true }
+                    onTouchTap={ this._onUpdate }/>
+      </Link>
     ];
   }
 

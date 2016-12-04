@@ -1,14 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
 import menuItems from './_menu_items';
-import {
-  openCreateTaskDialog,
-  closeMenu
-} from '../actions';
 
 const AppMenu = (props) => {
     return (
