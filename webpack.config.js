@@ -2,10 +2,10 @@ const webpack = require('webpack');
 const prod = process.argv.indexOf('-p') !== -1;
 
 config = {
-  context: __dirname + '/app',
+  context: __dirname + '/frontend',
   entry: './main.js',
   output: {
-    path: __dirname + '/public/scripts',
+    path: __dirname + '/backend/public/scripts',
     publicPath: '/scripts/',
     filename: 'bundle.js'
   },
@@ -17,7 +17,13 @@ config = {
   },
   devServer: {
     inline: true,
-    contentBase: './public'
+    contentBase: './backend/public',
+    proxy: {
+      '/graphql': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
+    }
   }
 };
 
