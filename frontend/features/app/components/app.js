@@ -5,7 +5,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Content from './content';
 import { CreateTaskDialog, EditTaskDialog } from '../../task';
 
-
 import {
   Router,
   Route,
