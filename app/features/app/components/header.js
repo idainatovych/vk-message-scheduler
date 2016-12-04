@@ -15,7 +15,6 @@ const Header = (props) => (
     <AppBar title="VK Scheduler"
             iconClassNameRight={className}
             onLeftIconButtonTouchTap={props.openMenu}/>
-    {props.children}
     <Backdrop open={props.isMenuOpen}
               onClick={props.closeMenu}/>
   </div>
