@@ -14,7 +14,8 @@ const root = {
         } else {
           const tasks = elements.map(el => {
             return new Task(el.title);
-          })
+          });
+          resolve(tasks);
         }
       });
     })
