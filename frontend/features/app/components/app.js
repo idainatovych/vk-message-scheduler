@@ -3,15 +3,8 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Content from './content';
-import {
-  ScheduleTaskButton,
-  CreateTaskDialog,
-} from '../../task';
+import { CreateTaskDialog, EditTaskDialog } from '../../task';
 
-// Actions
-import {
-  openCreateTaskDialog
-} from '../actions';
 
 import {
   Router,
@@ -23,24 +16,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return <MuiThemeProvider>
-      <div>
-        <Router history={browserHistory}>
-          <Route path='/' component={Content}>
-            <Route path='create-task' component={CreateTaskDialog}/>
-          </Route>
-        </Router>
-        <div className="action-area">
-          <ScheduleTaskButton onTouchTap={this.props.openCreateTaskDialog}/>
-        </div>
-      </div>
+      <Router history={browserHistory}>
+        <Route path='/' component={Content}>
+          <Route path='create-task' component={CreateTaskDialog}/>
+          <Route path='edit-task' component={EditTaskDialog}/>
+        </Route>
+      </Router>
     </MuiThemeProvider>
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  openCreateTaskDialog: () => openCreateTaskDialog(dispatch)
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default connect()(App);

@@ -28,10 +28,12 @@ export default (state = defaultState, action) => {
         isCreateTaskDialogOpen: false
       });
     case AppActionKeys.OPEN_EDIT_TASK_DIALOG:
+      browserHistory.push('/edit-task');
       return Object.assign({}, state, {
         isEditTaskDialogOpen: true
       });
     case AppActionKeys.CLOSE_EDIT_TASK_DIALOG:
+      browserHistory.goBack();
       return Object.assign({}, state, {
         isEditTaskDialogOpen: false
       });
