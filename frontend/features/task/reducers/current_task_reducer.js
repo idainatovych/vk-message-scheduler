@@ -1,52 +1,42 @@
+import { Map } from 'immutable';
+
 import TaskActionKeys from '../keys';
 import AppActionKeys from '../../app/keys';
 
-const defaultTask = {
+const defaultTask = Map({
   title: '',
   recipient: '',
   date: null,
   time: null,
   repeatEveryDay: false,
   repeatEveryWeek: false
-};
+});
 
-export default function currentTask(state = Object.assign({}, defaultTask), action) {
-  switch(action.type) {
+export default function currentTask(state = defaultTask, action) {
+  switch (action.type) {
     case TaskActionKeys.RESET:
-      return Object.assign({}, defaultTask);
+      return defaultTask;
 
     case TaskActionKeys.TITLE_CHANGED:
-      return Object.assign({}, state, {
-        title: action.title
-      });
+      return state.set('title', action.title);
 
     case TaskActionKeys.RECIPIENT_CHANGED:
-      return Object.assign({}, state, {
-        recipient: action.name
-      });
+      return state.set('recipient', action.name);
 
     case TaskActionKeys.DATE_CHANGED:
-      return Object.assign({}, state, {
-        date: action.date
-      });
+      return state.set('date', action.date);
 
     case TaskActionKeys.TIME_CHANGED:
-      return Object.assign({}, state, {
-        time: action.time
-      });
+      return state.set('time', action.time);
 
     case TaskActionKeys.REPEAT_EVERY_DAY:
-      return Object.assign({}, state, {
-        repeatEveryDay: action.repeat
-      });
+      return state.set('repeatEveryDay', action.repeat);
 
     case TaskActionKeys.REPEAT_EVERY_WEEK:
-      return Object.assign({}, state, {
-        repeatEveryWeek: action.repeat
-      });
+      return state.set('repeatEveryWeek', action.repeat);
 
     case AppActionKeys.OPEN_EDIT_TASK_DIALOG:
-      return Object.assign({}, defaultTask, action.task);
+      return Map(action.task);
 
     default:
       return state;

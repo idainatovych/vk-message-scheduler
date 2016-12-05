@@ -20,7 +20,7 @@ const AppMenu = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.app.isMenuOpen
+  open: state.app.get('isMenuOpen')
 });
 
 const mapDispatchToProps = (dispatch) => ({

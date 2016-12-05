@@ -16,6 +16,7 @@
     "co-body": "^4.0.0",
     "co-views": "^2.1.0",
     "graphql": "^0.8.2",
+    "immutable": "^3.8.1",
     "koa": "^1.2.0",
     "koa-compress": "^1.0.6",
     "koa-graphql": "^0.6.0",

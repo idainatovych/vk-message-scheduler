@@ -87,8 +87,8 @@ class EditTaskDialog extends AbstractTaskDialog {
 }
 
 const mapStateToProps = (state) => ({
-  open: state.app.isEditTaskDialogOpen,
-  currentTask: state.tasks.currentTask
+  open: state.app.get('isEditTaskDialogOpen'),
+  currentTask: state.tasks.currentTask.toObject()
 });
 
 const mapDispatchToProps = (dispatch) => ({

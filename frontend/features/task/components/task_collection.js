@@ -117,7 +117,7 @@ class TaskCollection extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: state.tasks.tasks
+  tasks: state.tasks.tasks.toJS()
 });
 
 const mapDispatchToProps = (dispatch) => ({

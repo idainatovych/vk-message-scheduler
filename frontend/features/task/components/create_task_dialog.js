@@ -66,8 +66,8 @@ class CreateTaskDialog extends AbstractTaskDialog {
 CreateTaskDialog.propTypes = AbstractTaskDialog.propTypes;
 
 const mapStateToProps = (state) => ({
-  open: state.app.isCreateTaskDialogOpen,
-  currentTask: state.tasks.currentTask
+  open: state.app.get('isCreateTaskDialogOpen'),
+  currentTask: state.tasks.currentTask.toObject()
 });
 
 const mapDispatchToProps = (dispatch) => ({
