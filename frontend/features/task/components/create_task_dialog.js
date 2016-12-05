@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 import { AppActions } from '../../app';
 import { createTask, validate } from '../actions';
@@ -22,10 +22,8 @@ class CreateTaskDialog extends AbstractTaskDialog {
         <FlatButton label="Cancel"
                     onTouchTap={props.onClose}/>
       </Link>,
-      <Link to="/">
-        <FlatButton label="Create" primary={true}
-                    onTouchTap={this._onCreate}/>
-      </Link>
+      <FlatButton label="Create" primary={true}
+                  onTouchTap={this._onCreate}/>
     ];
   }
 
@@ -56,6 +54,7 @@ class CreateTaskDialog extends AbstractTaskDialog {
       repeatEveryDay,
       repeatEveryWeek
     });
+    browserHistory.goBack();
   }
 
   render() {
