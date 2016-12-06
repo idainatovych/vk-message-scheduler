@@ -19,4 +19,24 @@ const taskSchema = new Schema({
   repeatEveryWeek: Boolean
 });
 
+taskSchema.methods.toGraphQL = function () {
+  const {
+    _id,
+    title,
+    recipient,
+    date,
+    repeatEveryDay,
+    repeatEveryWeek
+  } = this;
+
+  return {
+    id: _id,
+    title,
+    recipient,
+    date,
+    repeatEveryDay,
+    repeatEveryWeek
+  }
+};
+
 module.exports = mongoose.model('Task', taskSchema);

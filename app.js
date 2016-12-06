@@ -9,20 +9,18 @@ const GraphqlHTTP = require('koa-graphql');
 const path = require('path');
 const app = module.exports = koa();
 
-const { schema } = require('./backend/schema/schema');
-const root = require('./backend/graphql');
+const schema = require('./backend/schema/schema');
 
 // Logger
 app.use(logger());
 
 app.use(mount('/graphql', GraphqlHTTP({
   schema: schema,
-  rootValue: root,
   graphiql: true
 })));
 
 // Serve static files
-app.use(serve(path.join(__dirname, '/backend/public')));
+app.use(mount('/', serve(path.join(__dirname, '/backend/public'))));
 
 // Compress
 app.use(compress());
