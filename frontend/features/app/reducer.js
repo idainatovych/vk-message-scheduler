@@ -1,37 +1,33 @@
+import { Map }  from 'immutable';
+
 import AppActionKeys from './keys';
 
-const defaultState = {
+let defaultState = Map({
   isMenuOpen: false,
   isCreateTaskDialogOpen: false,
   isEditTaskDialogOpen: false,
-};
+});
 
 export default (state = defaultState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case AppActionKeys.OPEN_MENU:
-      return Object.assign({}, state, {
-        isMenuOpen: true
-      });
+      return state.set('isMenuOpen', true);
+
     case AppActionKeys.CLOSE_MENU:
-      return Object.assign({}, state, {
-        isMenuOpen: false
-      });
+      return state.set('isMenuOpen', false);
+
     case AppActionKeys.OPEN_CREATE_TASK_DIALOG:
-      return Object.assign({}, state, {
-        isCreateTaskDialogOpen: true
-      });
+      return state.set('isCreateTaskDialogOpen', true);
+
     case AppActionKeys.CLOSE_CREATE_TASK_DIALOG:
-      return Object.assign({}, state, {
-        isCreateTaskDialogOpen: false
-      });
+      return state.set('isCreateTaskDialogOpen', false);
+
     case AppActionKeys.OPEN_EDIT_TASK_DIALOG:
-      return Object.assign({}, state, {
-        isEditTaskDialogOpen: true
-      });
+      return state.set('isEditTaskDialogOpen', true);
+
     case AppActionKeys.CLOSE_EDIT_TASK_DIALOG:
-      return Object.assign({}, state, {
-        isEditTaskDialogOpen: false
-      });
+      return state.set('isEditTaskDialogOpen', false);
+
     default:
       return state;
   }

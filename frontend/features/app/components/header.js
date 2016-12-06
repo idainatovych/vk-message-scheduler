@@ -21,7 +21,7 @@ const Header = (props) => (
 );
 
 const mapStateToProps = (state) => ({
-  isMenuOpen: state.app.isMenuOpen,
+  isMenuOpen: state.app.get('isMenuOpen'),
 });
 
 const mapDispatchToProps = (dispatch) => ({

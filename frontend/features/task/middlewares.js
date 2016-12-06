@@ -1,3 +1,5 @@
+import { Map } from 'immutable';
+
 import AppActionKeys from '../app/keys';
 
 export const editTask = store => next => action => {
@@ -5,9 +7,9 @@ export const editTask = store => next => action => {
   let state = store.getState();
 
   if (action.type == AppActionKeys.OPEN_EDIT_TASK_DIALOG) {
-    for (let el of state.tasks.tasks) {
+    for (let el of state.tasks.tasks.toJS()) {
       if (el.id === action.id) {
-        task = Object.assign({}, el);
+        task = Map(el);
       }
     }
     action.task = task;

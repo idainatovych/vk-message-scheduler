@@ -1,32 +1,29 @@
 const validationFuncs = {
-  NON_EMPTY: (a) => {
-    return !!a.toString().length;
-  },
-  NOT_NULL: (a) => {
-    return a !== null;
-  }
+  NON_EMPTY: a =>  !!a.toString().length,
+  NOT_NULL: (a) =>  a !== null
 };
+
+const required = key => `Please enter ${key}`;
+const getMessage = key => required(key);
 
 const rules = {
   title: {
     validate: validationFuncs.NON_EMPTY,
-    getMessage: key => required(key)
+    getMessage
   },
   recipient: {
     validate: validationFuncs.NON_EMPTY,
-    getMessage: key => required(key)
+    getMessage
   },
   date: {
     validate: validationFuncs.NOT_NULL,
-    getMessage: key => required(key)
+    getMessage
   },
   time: {
     validate: validationFuncs.NOT_NULL,
-    getMessage: key => required(key)
+    getMessage
   }
 };
-
-const required = key => `Please enter ${key}`;
 
 export default function validation(task) {
   const validate = {};

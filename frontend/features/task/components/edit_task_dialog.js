@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 import { AppActions } from '../../app';
 import {
@@ -28,16 +28,12 @@ class EditTaskDialog extends AbstractTaskDialog {
         <FlatButton label="Cancel"
                     onTouchTap={ props.onClose }/>
       </Link>,
-      <Link to="/">
-        <FlatButton label="Delete"
-                    secondary={ true }
-                    onTouchTap={ this._onDelete }/>
-      </Link>,
-      <Link to="/">
-        <FlatButton label="Update"
-                    primary={ true }
-                    onTouchTap={ this._onUpdate }/>
-      </Link>
+      <FlatButton label="Delete"
+                  secondary={ true }
+                  onTouchTap={ this._onDelete }/>,
+      <FlatButton label="Update"
+                  primary={ true }
+                  onTouchTap={ this._onUpdate }/>
     ];
   }
 
@@ -70,15 +66,12 @@ class EditTaskDialog extends AbstractTaskDialog {
       repeatEveryDay,
       repeatEveryWeek
     });
+    browserHistory.goBack();
   }
 
   _onDelete() {
-    let {
-      onDelete,
-      currentTask
-    } = this.props;
-
-    onDelete(currentTask.id);
+    this.props.onDelete(this.props.currentTask.id);
+    browserHistory.goBack();
   }
 
   render() {
@@ -87,8 +80,8 @@ class EditTaskDialog extends AbstractTaskDialog {
 }
 
 const mapStateToProps = (state) => ({
-  open: state.app.isEditTaskDialogOpen,
-  currentTask: state.tasks.currentTask
+  open: state.app.get('isEditTaskDialogOpen'),
+  currentTask: state.tasks.currentTask.toObject()
 });
 
 const mapDispatchToProps = (dispatch) => ({

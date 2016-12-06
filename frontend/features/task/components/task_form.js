@@ -60,9 +60,9 @@ class TaskForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  recipientList: state.connections,
-  validation: state.tasks.validation,
-  currentTask: state.tasks.currentTask
+  recipientList: state.connections.toArray(),
+  validation: state.tasks.validation.toObject(),
+  currentTask: state.tasks.currentTask.toObject()
 });
 
 const mapDispatchToProps = (dispatch) => ({
