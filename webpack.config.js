@@ -18,10 +18,12 @@ const config = {
         loader: 'eslint-loader',
       },
     ],
-    loaders: [{
-      test: /\.jsx?$/,
-      loader: 'babel-loader',
-    }],
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+      },
+    ],
   },
   devServer: {
     inline: true,
@@ -35,7 +37,6 @@ const config = {
   },
   eslint: {
     configFile: './.eslintrc',
-    failOnError: true,
   },
 };
 

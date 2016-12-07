@@ -29,11 +29,13 @@ export default function validation(task) {
   const validate = {};
 
   for (const item in rules) {
-    const rule = rules[item];
-    const value = task[item];
+    if ({}.hasOwnProperty.call(rules, item)) {
+      const rule = rules[item];
+      const value = task[item];
 
-    if (!rule.validate(value)) {
-      validate[item] = rule.getMessage(item);
+      if (!rule.validate(value)) {
+        validate[item] = rule.getMessage(item);
+      }
     }
   }
 
