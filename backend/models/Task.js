@@ -20,22 +20,13 @@ const taskSchema = new Schema({
 });
 
 taskSchema.methods.toGraphQL = function () {
-  const {
-    _id,
-    title,
-    recipient,
-    date,
-    repeatEveryDay,
-    repeatEveryWeek
-  } = this;
-
   return {
-    id: _id,
-    title,
-    recipient,
-    date,
-    repeatEveryDay,
-    repeatEveryWeek
+    id: this._id,
+    title: this.title,
+    recipient: this.recipient,
+    date: this.date,
+    repeatEveryDay: this.repeatEveryDay,
+    repeatEveryWeek: this.repeatEveryWeek
   }
 };
 

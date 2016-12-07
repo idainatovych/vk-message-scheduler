@@ -17,18 +17,11 @@ const connectionSchema = new Schema({
 });
 
 connectionSchema.methods.toGraphQL = function () {
-  const {
-    _id,
-    vkId,
-    firstName,
-    lastName
-  } = this;
-
   return {
-    id: _id,
-    vkId,
-    firstName,
-    lastName
+    id: this._id,
+    vkId: this.vkId,
+    firstName: this.firstName,
+    lastName: this.lastName
   }
 };
 
