@@ -9,7 +9,7 @@ const defaultTask = Map({
   date: null,
   time: null,
   repeatEveryDay: false,
-  repeatEveryWeek: false
+  repeatEveryWeek: false,
 });
 
 export default function currentTask(state = defaultTask, action) {

@@ -16,5 +16,5 @@ export {
   taskForm as TaskForm,
   reducer as tasks,
   actions as TaskActions,
-  middlewares as tasksMiddlewares
+  middlewares as tasksMiddlewares,
 };

@@ -3,5 +3,5 @@ import helpers from './helpers';
 
 export {
   backdrop as Backdrop,
-  helpers as helpers
+  helpers,
 };

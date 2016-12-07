@@ -1,5 +1,5 @@
 import reducer from './reducer';
 
 export {
-  reducer as connections
+  reducer as connections,
 };

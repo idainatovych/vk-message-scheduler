@@ -2,12 +2,12 @@ import { Map } from 'immutable';
 
 import AppActionKeys from '../app/keys';
 
-export const editTask = store => next => action => {
+export default store => next => (action) => {
   let task = {};
-  let state = store.getState();
+  const state = store.getState();
 
-  if (action.type == AppActionKeys.OPEN_EDIT_TASK_DIALOG) {
-    for (let el of state.tasks.tasks.toJS()) {
+  if (action.type === AppActionKeys.OPEN_EDIT_TASK_DIALOG) {
+    for (const el of state.tasks.tasks.toJS()) {
       if (el.id === action.id) {
         task = Map(el);
       }
@@ -17,5 +17,3 @@ export const editTask = store => next => action => {
 
   return next(action);
 };
-
-

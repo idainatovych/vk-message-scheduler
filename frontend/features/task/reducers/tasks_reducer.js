@@ -6,18 +6,14 @@ import { helpers } from '../../utils';
 export default function tasks(state = List([]), action) {
   switch (action.type) {
     case TaskActionKeys.CREATE_TASK:
-      let task = Map(action.task).set('id', helpers.generateId());
-      return state.push(task);
+      return state.push(Map(action.task).set('id', helpers.generateId()));
 
     case TaskActionKeys.UPDATE_TASK:
-      action.task = Map(action.task);
-      const index = state.findIndex(item => item.get('id') === action.task.get('id'));
-      return state.set(index, action.task);
+      const index = state.findIndex(item => item.get('id') === Map(action.task).get('id'));
+      return state.set(index, Map(action.task));
 
     case TaskActionKeys.DELETE_TASK:
-      return state.filter((el) => {
-        return el.get('id') !== action.id
-      });
+      return state.filter(el => el.get('id') !== action.id);
 
     default:
       return state;

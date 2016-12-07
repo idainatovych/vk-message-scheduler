@@ -4,14 +4,14 @@ import { Link } from 'react-router';
 
 import {
   GridList,
-  GridTile
+  GridTile,
 } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
 import EditTaskDialog from './edit_task_dialog';
-import { AppActions, app } from '../../app';
+import { AppActions } from '../../app';
 import { helpers } from '../../utils';
 
 const DAYS_OF_WEEK = [
@@ -21,7 +21,7 @@ const DAYS_OF_WEEK = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday'
+  'Saturday',
 ];
 
 const MONTHS = [
@@ -36,18 +36,17 @@ const MONTHS = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ];
 
 class TaskCollection extends React.Component {
 
   _renderSchedule() {
-    if (this.props.tasks.length > 0) {
-      let tasks = this.props.tasks.sort((a, b) => a.date > b.date);
+    if (this.props.tasks.length) {
+      const tasks = this.props.tasks.sort((a, b) => a.date > b.date);
       return this._getTileCollection(tasks);
-    } else {
-      return <p>Empty, click action button to create.</p>
     }
+    return <p>Empty, click action button to create.</p>;
   }
 
   _getTileCollection(tasks) {
@@ -57,13 +56,13 @@ class TaskCollection extends React.Component {
       if (!date || helpers.compareDatesWithoutTime(date, task.date) !== 0) {
         date = task.date;
 
-        let month = MONTHS[date.getMonth()];
-        let dayOfWeek = DAYS_OF_WEEK[date.getDay()];
-        let day = date.getDate();
-        let year = date.getFullYear();
+        const month = MONTHS[date.getMonth()];
+        const dayOfWeek = DAYS_OF_WEEK[date.getDay()];
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const text = `${dayOfWeek}, ${month} ${day}, ${year}`;
 
-        let text = `${ dayOfWeek }, ${ month } ${ day }, ${ year }`;
-        acc.push(<Subheader key={ helpers.generateId() }>{ text }</Subheader>);
+        acc.push(<Subheader key={helpers.generateId()}>{text}</Subheader>);
       }
 
       acc.push(this._renderTile(task));
@@ -72,22 +71,25 @@ class TaskCollection extends React.Component {
   }
 
   _renderTile(task) {
-    let {
+    const {
       id,
       title,
       date,
-      recipient
+      recipient,
     } = task;
 
-    let formattedDate = helpers.formatDate(date);
-    let subtitle = `${recipient} at ${formattedDate}`;
+    const formattedDate = helpers.formatDate(date);
+    const subtitle = `${recipient} at ${formattedDate}`;
 
 
     return (
-      <GridTile key={ id } title={ title }
-                actionIcon={ this._getActionIcon(id) }
-                subtitle={ subtitle }>
-        <img src="http://lorempixel.com/300/300/cats"/>
+      <GridTile
+        key={id}
+        title={title}
+        actionIcon={this._getActionIcon(id)}
+        subtitle={subtitle}
+      >
+        <img src="http://lorempixel.com/300/300/cats" alt="Task" />
       </GridTile>
     );
   }
@@ -95,8 +97,8 @@ class TaskCollection extends React.Component {
   _getActionIcon(id) {
     return (
       <Link to="/edit-task">
-        <IconButton onTouchTap={ () => this.props.openEditTaskDialog(id) }>
-          <ActionInfo color="white"/>
+        <IconButton onTouchTap={() => this.props.openEditTaskDialog(id)}>
+          <ActionInfo color="white" />
         </IconButton>
       </Link>
     );
@@ -116,12 +118,12 @@ class TaskCollection extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  tasks: state.tasks.tasks.toJS()
+const mapStateToProps = state => ({
+  tasks: state.tasks.tasks.toJS(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  openEditTaskDialog: (id) => AppActions.openEditTaskDialog(dispatch, id)
+const mapDispatchToProps = dispatch => ({
+  openEditTaskDialog: id => AppActions.openEditTaskDialog(dispatch, id),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskCollection);

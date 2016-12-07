@@ -5,28 +5,32 @@ import { Backdrop } from '../../utils';
 
 import {
   openMenu,
-  closeMenu
+  closeMenu,
 } from '../actions';
 
 const className = 'muidocs-icon-navigation-expand-more';
 
-const Header = (props) => (
+const Header = props => (
   <div>
-    <AppBar title="VK Scheduler"
-            iconClassNameRight={className}
-            onLeftIconButtonTouchTap={props.openMenu}/>
-    <Backdrop open={props.isMenuOpen}
-              onClick={props.closeMenu}/>
+    <AppBar
+      title="VK Scheduler"
+      iconClassNameRight={className}
+      onLeftIconButtonTouchTap={props.openMenu}
+    />
+    <Backdrop
+      open={props.isMenuOpen}
+      onClick={props.closeMenu}
+    />
   </div>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isMenuOpen: state.app.get('isMenuOpen'),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   openMenu: () => openMenu(dispatch),
-  closeMenu: () => closeMenu(dispatch)
+  closeMenu: () => closeMenu(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

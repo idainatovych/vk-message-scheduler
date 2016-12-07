@@ -3,7 +3,7 @@ import TaskActionKeys from './keys';
 export function createTask(dispatch, task) {
   dispatch({
     type: TaskActionKeys.CREATE_TASK,
-    task
+    task,
   });
 }
 
@@ -16,62 +16,62 @@ export function resetTask(dispatch) {
 export function validate(dispatch, validation) {
   dispatch({
     type: TaskActionKeys.VALIDATE,
-    validation
+    validation,
   });
 }
 
 export function titleChanged(dispatch, title) {
   dispatch({
     type: TaskActionKeys.TITLE_CHANGED,
-    title
+    title,
   });
 }
 
 export function recipientChanged(dispatch, name) {
   dispatch({
     type: TaskActionKeys.RECIPIENT_CHANGED,
-    name
+    name,
   });
 }
 
 export function dateChanged(dispatch, date) {
   dispatch({
     type: TaskActionKeys.DATE_CHANGED,
-    date
-  })
+    date,
+  });
 }
 
 export function timeChanged(dispatch, time) {
   dispatch({
     type: TaskActionKeys.TIME_CHANGED,
-    time
+    time,
   });
 }
 
 export function repeatEveryDay(dispatch, repeat) {
   dispatch({
     type: TaskActionKeys.REPEAT_EVERY_DAY,
-    repeat
-  })
+    repeat,
+  });
 }
 
 export function repeatEveryWeek(dispatch, repeat) {
   dispatch({
     type: TaskActionKeys.REPEAT_EVERY_WEEK,
-    repeat
+    repeat,
   });
 }
 
 export function updateTask(dispatch, task) {
   dispatch({
     type: TaskActionKeys.UPDATE_TASK,
-    task
+    task,
   });
 }
 
 export function deleteTask(dispatch, id) {
   dispatch({
     type: TaskActionKeys.DELETE_TASK,
-    id
+    id,
   });
 }

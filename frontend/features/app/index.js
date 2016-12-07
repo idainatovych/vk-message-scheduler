@@ -4,8 +4,8 @@ import AppActionKeys from './keys';
 import * as actions from './actions';
 
 export {
-  App as App,
-  app as app,
-  AppActionKeys as AppActionKeys,
-  actions as AppActions
-}
+  App,
+  app,
+  AppActionKeys,
+  actions as AppActions,
+};

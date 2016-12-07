@@ -1,6 +1,6 @@
 const validationFuncs = {
-  NON_EMPTY: a =>  !!a.toString().length,
-  NOT_NULL: (a) =>  a !== null
+  NON_EMPTY: a => !!a.toString().length,
+  NOT_NULL: a => a !== null,
 };
 
 const required = key => `Please enter ${key}`;
@@ -9,20 +9,20 @@ const getMessage = key => required(key);
 const rules = {
   title: {
     validate: validationFuncs.NON_EMPTY,
-    getMessage
+    getMessage,
   },
   recipient: {
     validate: validationFuncs.NON_EMPTY,
-    getMessage
+    getMessage,
   },
   date: {
     validate: validationFuncs.NOT_NULL,
-    getMessage
+    getMessage,
   },
   time: {
     validate: validationFuncs.NOT_NULL,
-    getMessage
-  }
+    getMessage,
+  },
 };
 
 export default function validation(task) {
@@ -37,5 +37,5 @@ export default function validation(task) {
     }
   }
 
-  return validate
+  return validate;
 }
