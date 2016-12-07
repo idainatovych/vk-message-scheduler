@@ -5,7 +5,7 @@ const middlewares = [
 ];
 
 // Should be the last middleware in a chain
-/* eslint global-require: 0 */
+/* eslint global-require: 2 */
 if (process.env.NODE_ENV !== 'production') {
   const logger = require('redux-logger')(
     {
@@ -15,6 +15,6 @@ if (process.env.NODE_ENV !== 'production') {
   );
   middlewares.push(logger);
 }
-/* eslint global-require: 2 */
+/* eslint global-require: 0 */
 
 export default middlewares;

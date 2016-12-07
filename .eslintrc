@@ -11,7 +11,9 @@
         "allowAfterThis": true,
         "allowAfterSuper": true
       }
-    ]
+    ],
+    "no-static-element-interactions": ["off"],
+    "no-restricted-syntax": ["error", "WithStatement"]
   },
   "globals": {
     "require": 0

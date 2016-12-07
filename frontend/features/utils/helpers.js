@@ -3,9 +3,13 @@ export default {
    * Helper function generating unique id
    * @returns { number } unique identificator
    **/
-  generateId: (function () {
+  generateId: (() => {
     let currentId = 0;
-    return () => currentId++;
+    return () => {
+      const result = currentId;
+      currentId += 1;
+      return result;
+    };
   })(),
 
   /**
