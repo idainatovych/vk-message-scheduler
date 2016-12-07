@@ -37,6 +37,10 @@ const config = {
   },
   eslint: {
     configFile: './.eslintrc',
+    failOnError: true,
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
   },
 };
 

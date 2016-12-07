@@ -2,7 +2,9 @@ import { Map } from 'immutable';
 
 import AppActionKeys from '../app/keys';
 
-export default store => next => (action) => {
+
+// Need to fix this to default export
+export const editTask = store => next => (action) => {
   let task = {};
   const newAction = action;
   const state = store.getState();
