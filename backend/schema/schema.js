@@ -1,40 +1,8 @@
-const {
-  buildSchema
-} = require('graphql');
+const { GraphQLSchema } = require('graphql');
+const QueryType = require('./QueryType');
+const MutationType = require('./MutationType');
 
-
-class Connection {
-  constructor(firstName = 'No name', lastName = '') {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-}
-
-class Task {
-  constructor(title = 'No title') {
-    this.title = title;
-  }
-}
-
-const schema = buildSchema(`
-  type Connection {
-    firstName: String,
-    lastName: String
-  }
-
-  type Task {
-    title: String
-  }
-
-  type Query {
-    tasks: [Task]!,
-    connections: [Connection]!
-  }
-`);
-
-
-module.exports = {
-  schema,
-  Connection,
-  Task
-}
+module.exports = new GraphQLSchema({
+  query: QueryType,
+  mutation: MutationType
+});
