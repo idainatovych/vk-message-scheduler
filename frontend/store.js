@@ -1,10 +1,10 @@
-import reducer from './reducer';
-import middlewares from './middlewares';
-
 import {
   applyMiddleware,
-  createStore
-} from 'redux';
+  createStore,
+  } from 'redux';
+
+import reducer from './reducer';
+import middlewares from './middlewares';
 
 const store = createStore(reducer, applyMiddleware(...middlewares));
 

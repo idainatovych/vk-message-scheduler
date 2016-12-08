@@ -7,5 +7,5 @@ import validation from './validation_reducer';
 export default combineReducers({
   tasks,
   currentTask,
-  validation
+  validation,
 });

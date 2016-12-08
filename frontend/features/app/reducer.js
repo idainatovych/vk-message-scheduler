@@ -1,8 +1,8 @@
-import { Map }  from 'immutable';
+import { Map } from 'immutable';
 
 import AppActionKeys from './keys';
 
-let defaultState = Map({
+const defaultState = Map({
   isMenuOpen: false,
   isCreateTaskDialogOpen: false,
   isEditTaskDialogOpen: false,
@@ -31,4 +31,4 @@ export default (state = defaultState, action) => {
     default:
       return state;
   }
-}
+};

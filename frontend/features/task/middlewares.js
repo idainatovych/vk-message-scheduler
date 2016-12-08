@@ -2,20 +2,21 @@ import { Map } from 'immutable';
 
 import AppActionKeys from '../app/keys';
 
-export const editTask = store => next => action => {
-  let task = {};
-  let state = store.getState();
 
-  if (action.type == AppActionKeys.OPEN_EDIT_TASK_DIALOG) {
-    for (let el of state.tasks.tasks.toJS()) {
-      if (el.id === action.id) {
+// Need to fix this to default export
+export const editTask = store => next => (action) => {
+  let task = {};
+  const newAction = action;
+  const state = store.getState();
+
+  if (newAction.type === AppActionKeys.OPEN_EDIT_TASK_DIALOG) {
+    for (const el of state.tasks.tasks.toJS()) {
+      if (el.id === newAction.id) {
         task = Map(el);
       }
     }
-    action.task = task;
+    newAction.task = task;
   }
 
-  return next(action);
+  return next(newAction);
 };
-
-

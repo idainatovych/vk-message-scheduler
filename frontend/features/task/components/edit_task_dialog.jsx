@@ -7,7 +7,7 @@ import { AppActions } from '../../app';
 import {
   deleteTask,
   updateTask,
-  validate
+  validate,
 } from '../actions';
 import validation from './validation';
 import AbstractTaskDialog from './abstract_task_dialog';
@@ -25,34 +25,40 @@ class EditTaskDialog extends AbstractTaskDialog {
 
     this.actions = [
       <Link to="/">
-        <FlatButton label="Cancel"
-                    onTouchTap={ props.onClose }/>
+        <FlatButton
+          label="Cancel"
+          onTouchTap={props.onClose}
+        />
       </Link>,
-      <FlatButton label="Delete"
-                  secondary={ true }
-                  onTouchTap={ this._onDelete }/>,
-      <FlatButton label="Update"
-                  primary={ true }
-                  onTouchTap={ this._onUpdate }/>
+      <FlatButton
+        label="Delete"
+        secondary
+        onTouchTap={this._onDelete}
+      />,
+      <FlatButton
+        label="Update"
+        primary
+        onTouchTap={this._onUpdate}
+      />,
     ];
   }
 
   _onUpdate() {
-    const validate = validation(this.props.currentTask);
+    const isValid = validation(this.props.currentTask);
 
-    if (Object.keys(validate).length) {
+    if (Object.keys(isValid).length) {
       this.props.onValidation(validate);
       return;
     }
 
-    let {
+    const {
       id,
       title,
       recipient,
       date,
       time,
       repeatEveryWeek,
-      repeatEveryDay
+      repeatEveryDay,
     } = this.props.currentTask;
 
     date.setHours(time.getHours(), time.getMinutes());
@@ -64,7 +70,7 @@ class EditTaskDialog extends AbstractTaskDialog {
       date,
       time,
       repeatEveryDay,
-      repeatEveryWeek
+      repeatEveryWeek,
     });
     browserHistory.goBack();
   }
@@ -79,12 +85,12 @@ class EditTaskDialog extends AbstractTaskDialog {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   open: state.app.get('isEditTaskDialogOpen'),
-  currentTask: state.tasks.currentTask.toObject()
+  currentTask: state.tasks.currentTask.toObject(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onClose: () => AppActions.closeEditTaskDialog(dispatch),
   onValidation: value => validate(dispatch, value),
   onUpdate: (task) => {
@@ -94,7 +100,7 @@ const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => {
     deleteTask(dispatch, id);
     AppActions.closeEditTaskDialog(dispatch);
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditTaskDialog);

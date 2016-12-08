@@ -16,32 +16,37 @@ class CreateTaskDialog extends AbstractTaskDialog {
     // Bind methods
     this._onCreate = this._onCreate.bind(this);
 
-    this.title = "Create Task";
+    this.title = 'Create Task';
     this.actions = [
       <Link to="/">
-        <FlatButton label="Cancel"
-                    onTouchTap={props.onClose}/>
+        <FlatButton
+          label="Cancel"
+          onTouchTap={props.onClose}
+        />
       </Link>,
-      <FlatButton label="Create" primary={true}
-                  onTouchTap={this._onCreate}/>
+      <FlatButton
+        label="Create"
+        primary
+        onTouchTap={this._onCreate}
+      />,
     ];
   }
 
   _onCreate() {
-    const validate = validation(this.props.currentTask);
+    const isValid = validation(this.props.currentTask);
 
-    if (Object.keys(validate).length) {
+    if (Object.keys(isValid).length) {
       this.props.onValidation(validate);
       return;
     }
 
-    let {
+    const {
       title,
       recipient,
       date,
       time,
       repeatEveryWeek,
-      repeatEveryDay
+      repeatEveryDay,
     } = this.props.currentTask;
 
     date.setHours(time.getHours(), time.getMinutes());
@@ -52,7 +57,7 @@ class CreateTaskDialog extends AbstractTaskDialog {
       date,
       time,
       repeatEveryDay,
-      repeatEveryWeek
+      repeatEveryWeek,
     });
     browserHistory.goBack();
   }
@@ -64,18 +69,18 @@ class CreateTaskDialog extends AbstractTaskDialog {
 
 CreateTaskDialog.propTypes = AbstractTaskDialog.propTypes;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   open: state.app.get('isCreateTaskDialogOpen'),
-  currentTask: state.tasks.currentTask.toObject()
+  currentTask: state.tasks.currentTask.toObject(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onClose: () => AppActions.closeCreateTaskDialog(dispatch),
   onValidation: value => validate(dispatch, value),
-  onCreate: task => {
+  onCreate: (task) => {
     createTask(dispatch, task);
     AppActions.closeCreateTaskDialog(dispatch);
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskDialog);

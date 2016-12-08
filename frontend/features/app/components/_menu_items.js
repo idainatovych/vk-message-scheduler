@@ -1,17 +1,21 @@
 import {
   openCreateTaskDialog,
-  closeMenu
+  closeMenu,
 } from '../actions';
 
 export default [
   {
     text: 'My messages',
-    onTouchTap: (dispatch) => () => closeMenu(dispatch)
-  }, {
+    onTouchTap: dispatch => () => closeMenu(dispatch),
+  },
+  {
     text: 'Schedule message',
-    onTouchTap: (dispatch) => () => openCreateTaskDialog(dispatch)
-  }, {
+    onTouchTap: dispatch => () => openCreateTaskDialog(dispatch),
+  },
+  {
+    /* eslint-disable no-unused-vars */
     text: 'Sign out',
-    onTouchTap: (dispatch) => () => {}
-  }
+    onTouchTap: dispatch => () => {},
+    /* eslint-disable no-unused-vars */
+  },
 ];
